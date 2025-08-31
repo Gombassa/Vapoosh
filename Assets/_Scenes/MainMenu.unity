@@ -150,11 +150,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceRollSound: {fileID: 8300000, guid: 125c1d61dc0c8f046b245f068b750c0f, type: 3}
   placeCounterSound: {fileID: 8300000, guid: c8dc7f68a848eaf4f821e5c441fd41e8, type: 3}
+  captureSound: {fileID: 8300000, guid: 03e506ba2f2f3c74eb86df297171380f, type: 3}
+  winnerSound: {fileID: 8300000, guid: 8662a40fa6461d0499b6fe63c6ea7a55, type: 3}
   vapooshSound: {fileID: 8300000, guid: f17af717a619307459eec564c65a33c9, type: 3}
   wrongTileSound: {fileID: 8300000, guid: 808dc96925c656c44ab3e5b6482bd40e, type: 3}
   buttonClickSound: {fileID: 8300000, guid: fee3af035b0853346bc3b361602d3434, type: 3}
-  winnerSound: {fileID: 8300000, guid: 8662a40fa6461d0499b6fe63c6ea7a55, type: 3}
-  captureSound: {fileID: 8300000, guid: 03e506ba2f2f3c74eb86df297171380f, type: 3}
+  menuMusic: {fileID: 0}
+  gameMusic: {fileID: 0}
 --- !u!4 &224052049
 Transform:
   m_ObjectHideFlags: 0
@@ -206,7 +208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 450, y: 250}
+  m_AnchoredPosition: {x: 800, y: 420}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &555739711
@@ -962,7 +964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -450, y: 250}
+  m_AnchoredPosition: {x: -800, y: 420}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1764168338
@@ -1501,7 +1503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -250}
+  m_AnchoredPosition: {x: 800, y: -420}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1868554340
@@ -1784,7 +1786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -450, y: -250}
+  m_AnchoredPosition: {x: -800, y: -420}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2089778977
