@@ -10,6 +10,9 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        // Add a safety check to ensure the GameManager is ready before proceeding.
+        if (GameManager.Instance == null) return;
+
         if (GameManager.Instance.IsCurrentPlayerAI()) return;
         if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame) return;
         if (GameManager.Instance.currentState != GameManager.GameState.WaitingForMove) return;

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
@@ -29,7 +30,14 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            sfxSource = gameObject.AddComponent<AudioSource>();
+            
+            if(gameObject.GetComponent<AudioListener>() == null)
+            {
+                gameObject.AddComponent<AudioListener>();
+            }
+
+            AudioSource[] sources = GetComponents<AudioSource>();
+            sfxSource = sources[0];
             musicSource = gameObject.AddComponent<AudioSource>();
             musicSource.loop = true;
         }
