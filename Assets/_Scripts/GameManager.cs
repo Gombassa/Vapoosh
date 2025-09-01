@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         Vector2Int chosenIndex = new Vector2Int(x, y);
         Vector2Int validIndex1 = new Vector2Int(coordinateOption1.x - 1, coordinateOption1.y - 1);
         Vector2Int validIndex2 = new Vector2Int(coordinateOption2.x - 1, coordinateOption2.y - 1);
+
         if (chosenIndex == validIndex1 || chosenIndex == validIndex2)
         {
             boardManager.PlaceCounter(x, y, currentPlayerID);
@@ -141,14 +142,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (getsAnotherGo)
-                {
-                    StartTurn();
-                }
-                else
-                {
-                    NextTurn();
-                }
+                if (getsAnotherGo) { StartTurn(); }
+                else { NextTurn(); }
             }
         }
         else
