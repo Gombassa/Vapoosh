@@ -23,8 +23,9 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource sfxSource;
     private AudioSource musicSource;
-    private string currentScene;
     private Coroutine musicCoroutine;
+    private enum MusicState { Menu, Game, None }
+    private MusicState currentMusicState = MusicState.None;
 
     void Awake()
     {
@@ -54,14 +55,23 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != currentScene)
+        if (mode == LoadSceneMode.Additive)
         {
+            return;
+        }
+
+        MusicState newMusicState = (scene.name == "GameScene") ? MusicState.Game : MusicState.Menu;
+        
+        if (newMusicState != currentMusicState)
+        {
+            currentMusicState = newMusicState;
+            
             if (musicCoroutine != null)
             {
                 StopCoroutine(musicCoroutine);
             }
 
-            if (scene.name == "GameScene")
+            if (currentMusicState == MusicState.Game)
             {
                 musicCoroutine = StartCoroutine(PlayMusicLoop(gameMusicLoops));
             }
@@ -69,7 +79,6 @@ public class AudioManager : MonoBehaviour
             {
                 musicCoroutine = StartCoroutine(PlayMusicLoop(menuMusicLoops));
             }
-            currentScene = scene.name;
         }
     }
 
