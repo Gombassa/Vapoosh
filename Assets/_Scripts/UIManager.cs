@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI statusText;
-    [SerializeField] private Color[] playerColors;
     [SerializeField] private GameObject vapooshEffectPrefab;
     [SerializeField] private DiceDisplayController diceDisplay;
     public GameObject gameUIContainer;
+
+    [Header("Player Colors")]
+    [SerializeField] private Color[] playerColors;
 
     public void UpdateStatusText(string message, int playerID)
     {

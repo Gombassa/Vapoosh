@@ -1,6 +1,7 @@
 // In AudioManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
@@ -17,12 +18,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip buttonClickSound;
 
     [Header("Music")]
-    public AudioClip menuMusic;
-    public AudioClip gameMusic;
+    public AudioClip[] menuMusicLoops;
+    public AudioClip[] gameMusicLoops;
 
     private AudioSource sfxSource;
     private AudioSource musicSource;
     private string currentScene;
+    private Coroutine musicCoroutine;
 
     void Awake()
     {
@@ -39,7 +41,7 @@ public class AudioManager : MonoBehaviour
             AudioSource[] sources = GetComponents<AudioSource>();
             sfxSource = sources[0];
             musicSource = gameObject.AddComponent<AudioSource>();
-            musicSource.loop = true;
+            musicSource.loop = false;
         }
         else
         {
@@ -54,9 +56,46 @@ public class AudioManager : MonoBehaviour
     {
         if (scene.name != currentScene)
         {
-            if (scene.name == "GameScene") { PlayMusic(gameMusic); }
-            else { PlayMusic(menuMusic); }
+            if (musicCoroutine != null)
+            {
+                StopCoroutine(musicCoroutine);
+            }
+
+            if (scene.name == "GameScene")
+            {
+                musicCoroutine = StartCoroutine(PlayMusicLoop(gameMusicLoops));
+            }
+            else
+            {
+                musicCoroutine = StartCoroutine(PlayMusicLoop(menuMusicLoops));
+            }
             currentScene = scene.name;
+        }
+    }
+
+    private IEnumerator PlayMusicLoop(AudioClip[] clips)
+    {
+        if (clips == null || clips.Length == 0)
+        {
+            yield break;
+        }
+
+        int lastClipIndex = -1;
+        while (true)
+        {
+            int clipIndex;
+            do
+            {
+                clipIndex = Random.Range(0, clips.Length);
+            } while (clips.Length > 1 && clipIndex == lastClipIndex);
+
+            lastClipIndex = clipIndex;
+            AudioClip clipToPlay = clips[clipIndex];
+            
+            musicSource.clip = clipToPlay;
+            musicSource.Play();
+
+            yield return new WaitForSeconds(clipToPlay.length);
         }
     }
 
@@ -64,13 +103,14 @@ public class AudioManager : MonoBehaviour
     {
         if (clip != null) { sfxSource.PlayOneShot(clip); }
     }
-
-    public void PlayMusic(AudioClip clip)
+    
+    public void ToggleMusic()
     {
-        if (clip != null && musicSource.clip != clip)
-        {
-            musicSource.clip = clip;
-            musicSource.Play();
-        }
+        musicSource.mute = !musicSource.mute;
+    }
+
+    public bool IsMusicMuted()
+    {
+        return musicSource.mute;
     }
 }
